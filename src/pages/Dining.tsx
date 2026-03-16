@@ -1,36 +1,39 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/SectionHeading";
-import diningImg from "@/assets/dining-rooftop.jpg";
-import roomDeluxe from "@/assets/room-deluxe.jpg";
-import { Utensils, Leaf, Globe, Coffee, Bed, Mountain } from "lucide-react";
+import { Utensils, Sprout, Heart, Sparkles, Map, Mountain, LucideIcon } from "lucide-react";
 
-const highlights = [
-  { icon: Utensils, title: "Rooftop Restaurant", desc: "Dine under the stars with panoramic views." },
-  { icon: Globe, title: "Multi-Cuisine Menu", desc: "Global flavors with local authenticity." },
-  { icon: Leaf, title: "Fresh Ingredients", desc: "Farm-to-table sourcing for every dish." },
-  { icon: Coffee, title: "In-Room Dining", desc: "24/7 room service for your comfort." },
-  { icon: Mountain, title: "Valley View Dining", desc: "Ooty's breathtaking views with your meal." },
-  { icon: Bed, title: "Breakfast Included", desc: "Complimentary breakfast with every stay." },
+interface Highlight {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}
+
+const highlights: Highlight[] = [
+  { icon: Sprout, title: "Freshest Ingredients", desc: "Mostly sourced directly from our garden for maximum flavor." },
+  { icon: Heart, title: "Authentic Recipes", desc: "Traditional methods passed down to preserve true taste." },
+  { icon: Sparkles, title: "Delicate Flavours", desc: "We strive to preserve the subtle nuances of every dish." },
+  { icon: Utensils, title: "Rooftop Dining", desc: "Dine with a view at both our Chennai and Ooty locations." },
+  { icon: Map, title: "Multi-Cuisine", desc: "From multi-cuisine delicacies to Asian specialties." },
+  { icon: Mountain, title: "Valley Views", desc: "Magnificent views of the Ooty valley from our roof top." },
 ];
 
 export default function Dining() {
   return (
     <div className="pt-24">
-      <section className="relative h-[50vh] overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-background/60 z-10" />
-          <img src={diningImg} className="w-full h-full object-cover" alt="Rooftop dining" />
-        </div>
-        <div className="relative z-20 text-center">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="label-caps text-primary mb-4">Culinary</motion.p>
+      <section className="relative h-[40vh] bg-secondary/10 flex items-center justify-center">
+        <div className="relative z-20 text-center px-4">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="label-caps text-primary mb-4 text-center">Dining at DrizzleDrop Inn</motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="heading-display text-4xl md:text-6xl"
+            className="heading-display text-4xl md:text-6xl text-center"
           >
             A Feast for the Senses
           </motion.h1>
+          <p className="body-text max-w-2xl mx-auto mt-6 text-center">
+            At DrizzleDrop Inn, we believe in three simple principles: the freshest ingredients, authentic recipes, and preserving delicate flavours.
+          </p>
         </div>
       </section>
 
@@ -46,7 +49,9 @@ export default function Dining() {
                 transition={{ delay: i * 0.08, duration: 0.5 }}
                 className="glass-card p-8 text-center group hover:border-primary/30 transition-all duration-500 hover-gold-glow"
               >
-                <h.icon className="w-8 h-8 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <h.icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+                </div>
                 <h3 className="font-serif text-xl font-semibold mb-2">{h.title}</h3>
                 <p className="body-text text-sm">{h.desc}</p>
               </motion.div>
@@ -55,32 +60,44 @@ export default function Dining() {
         </div>
       </section>
 
-      <section className="section-padding bg-card/50">
-        <div className="container-luxury grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="label-caps text-primary mb-4">Experience</p>
-            <h2 className="heading-section mb-6">Authentic Recipes, Unforgettable Ambiance</h2>
-            <p className="body-text mb-4">
-              Our chefs craft each dish with passion, blending traditional recipes with modern techniques. From the rooftop restaurant in Chennai to the valley-view dining in Ooty, every meal is an experience.
+      <section className="section-padding bg-secondary/5">
+        <div className="container-luxury">
+           <SectionHeading label="Destinations" title="Locally Curated Flavours" />
+           <div className="grid md:grid-cols-2 gap-12 mt-12">
+                <div className="glass-card p-10">
+                    <h3 className="font-serif text-2xl font-bold mb-4">Chennai Rooftop</h3>
+                    <p className="body-text mb-6">
+                    Our rooftop specialty restaurant in Chennai offers Multi-Cuisine and Asian delicacies. A modern vibe with exceptional services makes it an ideal abode for the modern traveller.
+                    </p>
+                    <div className="flex gap-4">
+                        <span className="text-[10px] tracking-widest bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">CAFE</span>
+                        <span className="text-[10px] tracking-widest bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">ASIAN SPECIALTY</span>
+                    </div>
+                </div>
+
+                <div className="glass-card p-10">
+                    <h3 className="font-serif text-2xl font-bold mb-4">Ooty Valley View</h3>
+                    <p className="body-text mb-6">
+                    Located on the rooftop with a magnificent view of the valley. Enjoy fine-dine or the comfort of your room. Treat your taste buds to new and exciting dishes every single day.
+                    </p>
+                    <div className="flex gap-4">
+                        <span className="text-[10px] tracking-widest bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">VALLEY VIEW</span>
+                        <span className="text-[10px] tracking-widest bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">GARDEN FRESH</span>
+                    </div>
+                </div>
+           </div>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-luxury text-center max-w-3xl">
+            <h2 className="heading-section mb-6">Curated with Passion</h2>
+            <p className="body-text mb-8">
+            "Our chefs have carefully curated a diverse menu that highlights the finest elements of every cuisine. Treat your taste buds to new and exciting dishes every single day at DrizzleDrop Inn."
             </p>
-            <p className="body-text">
-              Enjoy fresh, locally sourced ingredients prepared to perfection. Whether it's a romantic dinner or a family feast, our restaurants cater to every palate and occasion.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="overflow-hidden"
-          >
-            <img src={roomDeluxe} alt="Dining experience" className="w-full h-80 object-cover" />
-          </motion.div>
+            <div className="bg-primary/5 p-8 border-l-4 border-primary italic font-serif text-lg text-foreground/80">
+            "Dining at DrizzleDrop Inn will be a memorable experience for your taste buds."
+            </div>
         </div>
       </section>
     </div>

@@ -18,22 +18,22 @@ const heroSlides: HeroSlide[] = [
   {
     image: heroChennai,
     location: "Chennai",
-    tagline: "Where Modernity Meets Heritage",
+    tagline: "Sophisticated Business Stay",
   },
   {
     image: heroOoty,
     location: "Ooty",
-    tagline: "Serenity Above the Clouds",
+    tagline: "Enchanting Nature Escapes",
   },
   {
     image: heroLobby,
     location: "Welcome",
-    tagline: "The Art of Arrival",
+    tagline: "The Prodigious Hospitality",
   },
   {
     image: heroBeach,
     location: "Coastal",
-    tagline: "Golden Hour, Every Hour",
+    tagline: "Serenity by the Shore",
   },
 ];
 

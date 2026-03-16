@@ -36,20 +36,25 @@ export default function BookingBar() {
     };
 
     return (
-        <div className="w-full max-w-6xl mx-auto px-4 z-40 relative mt-8">
+        <div className="w-full max-w-6xl mx-auto px-4 z-40 relative">
             {/* Search Bar Container */}
-            <div className="bg-background flex flex-col lg:flex-row shadow-xl border border-border/50 items-center overflow-hidden">
+            <div className="bg-background/95 backdrop-blur-sm flex flex-col lg:flex-row shadow-2xl border border-border/50 items-center overflow-hidden rounded-xl">
 
                 {/* Location Section */}
-                <div className="flex-1 w-full lg:w-auto p-4 flex items-center gap-3 border-b lg:border-b-0 lg:border-r border-border/50 transition-colors focus-within:bg-secondary/20">
-                    <MapPin className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                    <input
-                        type="text"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        className="w-full bg-transparent border-none outline-none text-foreground font-medium text-sm placeholder:text-muted-foreground"
-                        placeholder="Search Location"
-                    />
+                <div className="flex-1 w-full lg:w-auto p-2 border-b lg:border-b-0 lg:border-r border-border/50 transition-colors focus-within:bg-secondary/20">
+                    <Select value={location} onValueChange={setLocation}>
+                        <SelectTrigger className="w-full h-full border-none shadow-none focus:ring-0 bg-transparent flex items-center gap-3 py-4">
+                            <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
+                            <div className="flex flex-col items-start">
+                                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Location</span>
+                                <SelectValue placeholder="Select Location" />
+                            </div>
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="DrizzleDrop Inn, Chennai">DrizzleDrop Inn, Chennai</SelectItem>
+                            <SelectItem value="DrizzleDrop Inn, Ooty">DrizzleDrop Inn, Ooty</SelectItem>
+                        </SelectContent>
+                    </Select>
                 </div>
 
                 {/* Date Selection Section */}
@@ -58,17 +63,18 @@ export default function BookingBar() {
                         <PopoverTrigger asChild>
                             <button
                                 className={cn(
-                                    "w-full h-full p-4 flex items-center justify-between text-left font-medium text-sm gap-2",
+                                    "w-full h-full p-4 flex items-center justify-start text-left font-medium text-sm gap-3",
                                     !date && "text-muted-foreground"
                                 )}
                             >
-                                <div className="flex items-center gap-3">
-                                    <CalendarIcon className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                                <CalendarIcon className="w-5 h-5 text-primary flex-shrink-0" />
+                                <div className="flex flex-col items-start overflow-hidden">
+                                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Check In - Out</span>
                                     <span className="truncate">
                                         {date?.from ? (
                                             date.to ? (
                                                 <>
-                                                    {format(date.from, "dd MMM yyyy")} &mdash; {format(date.to, "dd MMM yyyy")}
+                                                    {format(date.from, "dd MMM")} - {format(date.to, "dd MMM yyyy")}
                                                 </>
                                             ) : (
                                                 format(date.from, "dd MMM yyyy")
@@ -99,10 +105,13 @@ export default function BookingBar() {
                     <Popover>
                         <PopoverTrigger asChild>
                             <button className="w-full h-full p-4 flex items-center gap-3 text-left font-medium text-sm">
-                                <Users className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                                <span className="truncate">
-                                    {totalGuests} Guest{totalGuests !== 1 && "s"} &mdash; {rooms} Room{rooms !== 1 && "s"}
-                                </span>
+                                <Users className="w-5 h-5 text-primary flex-shrink-0" />
+                                <div className="flex flex-col items-start overflow-hidden">
+                                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Guests & Rooms</span>
+                                    <span className="truncate">
+                                        {totalGuests} Guest{totalGuests !== 1 && "s"}, {rooms} Room{rooms !== 1 && "s"}
+                                    </span>
+                                </div>
                             </button>
                         </PopoverTrigger>
                         <PopoverContent className="w-80 p-4" align="start">
@@ -182,10 +191,11 @@ export default function BookingBar() {
                 {/* Special Code Section */}
                 <div className="flex-1 w-full lg:w-auto hover:bg-secondary/20 transition-colors">
                     <Select>
-                        <SelectTrigger className="w-full h-full p-4 border-none shadow-none focus:ring-0 rounded-none bg-transparent">
-                            <div className="flex items-center gap-3">
-                                <Crown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                                <SelectValue placeholder="Special Code" />
+                        <SelectTrigger className="w-full h-full p-4 border-none shadow-none focus:ring-0 rounded-none bg-transparent flex items-center gap-3">
+                            <Crown className="w-5 h-5 text-primary flex-shrink-0" />
+                            <div className="flex flex-col items-start overflow-hidden">
+                                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Offer Code</span>
+                                <SelectValue placeholder="None" />
                             </div>
                         </SelectTrigger>
                         <SelectContent>
@@ -200,7 +210,7 @@ export default function BookingBar() {
                 {/* Book Now Button */}
                 <button
                     onClick={handleBookNow}
-                    className="w-full lg:w-auto h-full px-10 py-5 bg-[#C5A861] hover:bg-[#b0944f] text-white font-bold tracking-wide text-sm whitespace-nowrap transition-colors duration-300 hover:shadow-lg focus:outline-none"
+                    className="w-full lg:w-auto h-full px-10 py-5 bg-primary hover:bg-primary/90 text-white font-bold tracking-wide text-sm whitespace-nowrap transition-all duration-300 hover:shadow-lg focus:outline-none"
                 >
                     BOOK NOW
                 </button>
